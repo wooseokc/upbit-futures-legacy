@@ -8,7 +8,6 @@ import store from "../../stores/coinStore";
 
 export default function InfoSector () {
 
-  console.log(store.getState)
   return (
     <Provider store={store}>
       <InfoSection>

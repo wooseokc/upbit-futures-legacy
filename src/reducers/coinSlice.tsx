@@ -1,23 +1,26 @@
 import {createSlice} from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from '../stores/coinStore';
 
 interface coinState {
-  src : string
-  korean : string
-  english : string
+  now : string
 }
 
-const initialState = { korean : 'BTC', src : `https://static.upbit.com/logos/BTC.png`, english: 'BTC/KRW' } as coinState
+
+
+const initialState : coinState = { now : 'BTC' }
 
 const coinSlice = createSlice({
   name : 'coinName',
   initialState : initialState,
   reducers: {
-    changeCoin (state, action) {
-      state.korean = action.payload.data;
-      state.src = action.payload.data;
+    changeCoin : (state, action: PayloadAction<string>) => {
+      state.now = action.payload;
     }
+  
   }
 })
 
-export const coinActions = coinSlice.actions
+export const {changeCoin} = coinSlice.actions
+export const selectCount = (state: RootState) => state.coin.now
 export default coinSlice.reducer

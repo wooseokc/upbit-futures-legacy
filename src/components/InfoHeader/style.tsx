@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height : 44px;
-  border : 1px solid;
+  border-bottom : 1px solid rgba(165,175,202,.6);
 `
 
 export const Forms = styled.a`
@@ -12,7 +12,6 @@ export const Forms = styled.a`
   position : relative;
   top:50%;
   transform: translateY(-50%);
-  border : 1px solid;
   cursor : pointer;
 `
 
@@ -50,4 +49,15 @@ export const Arrow = styled.div`
   
   background: url('https://cdn.upbit.com/upbit-web/images/ico_select_1.34dc566.png');
   background-repeat: no-repeat;
+`
+
+export const CoinList = styled.a`
+  display : block;
+  width : 190px;
+  height : 38px;
+  position : relative;
+  top : 3px;
+  border-bottom: 1px solid rgba(165,175,202,.6);
+  border-right: 1px solid rgba(165,175,202,.6);
+  cursor : pointer;
 `
