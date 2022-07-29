@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+// import { changeCoin } from "../../../reducers/coinSlice";
+import { useAppDispatch , useAppSelector} from "../../hooks/hooks";
 import { changeCoin } from "../../reducers/coinSlice";
 
 import { Container, Forms, Img, Korean, English, Arrow, CoinList } from "./style";
@@ -15,7 +16,6 @@ export default function InfoHeader () {
   const coin = useAppSelector((state) => state.coin.now)
   const dispatch = useAppDispatch()
 
-  console.log(coin)
 
   const coinlist : listState = {
     'BTC' : ['비트코인', 'https://static.upbit.com/logos/BTC.png', 'BTC/KRW'],

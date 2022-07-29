@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HeaderSection = styled.section`
   height : 60px;
+  width : 100%;
   background : #093687;
   position : relative;
 `
