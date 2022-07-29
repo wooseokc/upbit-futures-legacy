@@ -54,10 +54,12 @@ export const Arrow = styled.div`
 export const CoinList = styled.a`
   display : block;
   width : 190px;
-  height : 38px;
+  height : 40px;
   position : relative;
   top : 3px;
   border-bottom: 1px solid rgba(165,175,202,.6);
   border-right: 1px solid rgba(165,175,202,.6);
   cursor : pointer;
+  z-index : 99;
+  background : #fff;
 `

@@ -66,7 +66,7 @@ export const InputBox = styled.input`
 export const ShortButton = styled.button`
   background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
   width : 150px;
-  height : 80px;
+  height : 40px;
   border-radius : 5px;
   background : red;
 
@@ -76,10 +76,22 @@ export const ShortButton = styled.button`
   font-weight : 700;
   color : #F5F5F5;
 `
+export const InputButton = styled.button`
+  background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
+  width : 50px;
+  height : 20px;
+  border : 1px solid;
+  border-radius : 3px;
+  position : absolute;
+  top : 60px;
+  left : 90px;
+  font-size : 10px;
+  font-weight : 500;
+`
 export const LongButton = styled.button`
   background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
   width : 150px;
-  height : 80px;
+  height : 40px;
   border-radius : 5px;
   background : green;
 
@@ -90,7 +102,10 @@ export const LongButton = styled.button`
   color : #F5F5F5;
 `
 
-export const EnterIndex = styled.div`
+export const EnterIndex = styled.div<any>`
+  color : black;
+  ${props => props.fluc > 0 && {color : 'red'}}
+  ${props => props.fluc < 0 && {color : 'blue'}}
   position : absolute;
   right : 10px;
 `

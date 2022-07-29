@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import useInterval from "../../../hooks/useInterval";
 import { changePrice } from "../../../reducers/coinSlice";
-import { OrderBox, TypeBox ,CategoryInfo, DefaultRadio, Range, EnterIndex ,RangeIndex, RangeTimes, InputBox, ShortButton, LongButton } from "./style";
+import { OrderBox, TypeBox ,CategoryInfo, DefaultRadio, Range, EnterIndex ,RangeIndex, RangeTimes, InputBox, ShortButton, LongButton, InputButton } from "./style";
 
 
 export default function Order () {
@@ -29,7 +29,7 @@ export default function Order () {
   } 
 
 
-  useInterval(apicall, 1000)
+  useInterval(apicall, 500)
 
   useEffect(()=> {
     if(enterPrice && coinPrice) {
@@ -37,7 +37,6 @@ export default function Order () {
       if (fluctuation*leverage <-90) {
         setCondition('ready');
         setLastResult(-orderPrice)
-        setBudget(money => money-orderPrice)
         setEnterPrice(undefined)
       }
 
@@ -62,6 +61,8 @@ export default function Order () {
       } else {
         setCondition('Short');
       }
+
+      setInputValue('0')
   
       let tmp = inputValue.replaceAll(',','');
       console.log(`tmp > ${tmp}`)
@@ -96,6 +97,21 @@ export default function Order () {
     }
   }
 
+  const bettingRatio = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.innerHTML === '10%') {
+      setInputValue(Math.floor(budget/10).toLocaleString())
+    } else if (e.currentTarget.innerHTML === '25%') {
+      setInputValue(Math.floor(budget/4).toLocaleString())
+    }
+     else if (e.currentTarget.innerHTML === '50%') {
+      setInputValue(Math.floor(budget/2).toLocaleString())
+    }
+     else if (e.currentTarget.innerHTML === '100%') {
+      setInputValue(Math.floor(budget).toLocaleString())
+    }
+    
+  }
+
 
   return (
     <OrderBox>
@@ -111,17 +127,23 @@ export default function Order () {
       </TypeBox>
       <TypeBox>
         <CategoryInfo>레버리지</CategoryInfo>
-        <Range onChange={changeLever} type='range' min={5} max={500} step={5}></Range>
+        <Range onChange={changeLever} type='range' min={5} max={500} step={5} disabled={condition === 'ready' ? false : true}></Range>
         <RangeIndex>{leverage}</RangeIndex>
         <RangeTimes>X</RangeTimes>
       </TypeBox>
-      <TypeBox >
+      <TypeBox style={{height :80}}>
         <CategoryInfo>주문총액</CategoryInfo>
         <InputBox type={"text"} value={inputValue} onChange={changeLocaleScale}></InputBox>
+        <div>
+          <InputButton onClick={bettingRatio}>10%</InputButton>
+          <InputButton onClick={bettingRatio} style={{left : 160}}>25%</InputButton>
+          <InputButton onClick={bettingRatio} style={{left : 230}}>50%</InputButton>
+          <InputButton onClick={bettingRatio} style={{left : 300}}>100%</InputButton>
+        </div>
       </TypeBox>
-      <TypeBox style={{height : 80}}>
-        {condition === 'ready' ? <ShortButton onClick={enterBet}>Short/하락</ShortButton> : <ShortButton onClick={exitBet} style={{background : 'gray'}}>중지</ShortButton>}
-        {condition === 'ready' ? <LongButton onClick={enterBet}>Long/상승</LongButton> : <LongButton onClick={exitBet}  style={{background : 'gray'}}>중지</LongButton>}
+      <TypeBox style={{height : 40}}>
+        {condition === 'ready' ? <ShortButton onClick={enterBet}>Short / 하락</ShortButton> : <ShortButton onClick={exitBet} style={{background : 'gray'}}>중지</ShortButton>}
+        {condition === 'ready' ? <LongButton onClick={enterBet}>Long / 상승</LongButton> : <LongButton onClick={exitBet}  style={{background : 'gray'}}>중지</LongButton>}
         
       </TypeBox>
       <TypeBox>
@@ -134,21 +156,21 @@ export default function Order () {
       </TypeBox>
       <TypeBox>
         <CategoryInfo>변동폭</CategoryInfo>
-        {enterPrice && <EnterIndex style={fluctuation >0 ? {color : 'red'} : {color : 'blue'} }>{
+        {enterPrice && <EnterIndex fluc={fluctuation}>{
         coinPrice && `${(fluctuation).toFixed(2)}%`
         }</EnterIndex>}
       </TypeBox>
       <TypeBox>
         <CategoryInfo>수익률</CategoryInfo>
-        {enterPrice && <EnterIndex style={fluctuation > 0 ? {color : 'red'} : {color : 'blue'}}>{`${(fluctuation*leverage).toFixed(2)}%`}</EnterIndex>}
+        {enterPrice && <EnterIndex fluc={fluctuation}>{`${(fluctuation*leverage).toFixed(2)}%`}</EnterIndex>}
       </TypeBox>
       <TypeBox>
         <CategoryInfo>정산금액</CategoryInfo>
-        {enterPrice && <EnterIndex style={fluctuation > 0 ? {color : 'red'} : {color : 'blue'}}>{resultPrice.toLocaleString()}</EnterIndex>}
+        {enterPrice && <EnterIndex fluc={fluctuation}>{resultPrice.toLocaleString()}</EnterIndex>}
       </TypeBox>
       <TypeBox>
         <CategoryInfo>직전결과</CategoryInfo>
-        {lastResult && <EnterIndex style={lastResult > 0 ? {color : 'red'} : {color : 'blue'}}>{lastResult.toLocaleString()}</EnterIndex>}
+        {lastResult && <EnterIndex fluc={lastResult}>{lastResult.toLocaleString()}</EnterIndex>}
       </TypeBox>
     </OrderBox>
   )
