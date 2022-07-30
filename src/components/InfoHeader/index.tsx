@@ -5,22 +5,10 @@ import { changeCoin } from "../../reducers/coinSlice";
 
 import { Container, Forms, Img, Korean, English, Arrow, CoinList } from "./style";
 
-interface listState {
-  'BTC' : string[],
-  'ETH' : string[]
-}
-
-
 export default function InfoHeader () {
   const [visible, setVisible] = useState(false)
   const coin = useAppSelector((state) => state.coin.now)
   const dispatch = useAppDispatch()
-
-
-  const coinlist : listState = {
-    'BTC' : ['비트코인', 'https://static.upbit.com/logos/BTC.png', 'BTC/KRW'],
-    'ETH' : ['이더리움', 'https://static.upbit.com/logos/ETH.png', 'ETH/KRW']
-  }
 
   function listVisible () {
     if (visible === false) setVisible(true)
@@ -35,9 +23,6 @@ export default function InfoHeader () {
 
     setVisible (false)
   }
-
-
-
 
   return (
     <Container>

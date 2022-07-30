@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import InfoSection from "./style";
 import InfoHeader from "../InfoHeader";
 import Order from "./InfoOrder";
+import Chart from "./Chart";
 // import InfoHeader from "./InfoHeader";
 
 import store from "../../stores/coinStore";
@@ -16,6 +17,7 @@ export default function InfoSector () {
       <InfoSection>
         <InfoHeader></InfoHeader>
         <CoinInfo></CoinInfo>
+        <Chart></Chart>
       </InfoSection>
       <Order></Order>
     </Provider>

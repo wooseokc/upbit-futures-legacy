@@ -98,7 +98,7 @@ export const LongButton = styled.button`
   position : relative;
   left : 30px;
   font-size : 20px;
-  font-weight : 700;
+  font-weight : 600;
   color : #F5F5F5;
 `
 

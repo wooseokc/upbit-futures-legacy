@@ -27,8 +27,6 @@ export default function Order () {
       dispatch(changePrice(res.data[0]))
     })
   } 
-
-
   useInterval(apicall, 500)
 
   useEffect(()=> {
@@ -43,7 +41,7 @@ export default function Order () {
 
       if (condition === 'Long') {
         setFluctuation(((coinPrice-enterPrice)/enterPrice*100))
-      } else {
+      } else if (condition === 'Short') {
         setFluctuation(((enterPrice-coinPrice)/enterPrice*100))
       }
       setResultPrice(Math.floor(orderPrice + (orderPrice*fluctuation*leverage/100)))
@@ -56,7 +54,7 @@ export default function Order () {
       setBudget(money => money - enterNumber)
       setEnterPrice(coinPrice)
   
-      if(e.currentTarget.innerHTML === 'Long/상승') {
+      if(e.currentTarget.innerHTML === 'Long / 상승') {
         setCondition('Long');
       } else {
         setCondition('Short');
@@ -65,9 +63,7 @@ export default function Order () {
       setInputValue('0')
   
       let tmp = inputValue.replaceAll(',','');
-      console.log(`tmp > ${tmp}`)
       setOrderPrice(+tmp);
-      console.log(`enterPrice => ${enterPrice}`)
     } else {
       return
     }
@@ -89,7 +85,6 @@ export default function Order () {
 
   const changeLocaleScale = (e: React.ChangeEvent<HTMLInputElement>) => {
     let tmp = Number(e.target.value.replaceAll(',',''));
-    console.log(tmp)
     if (isNaN(tmp)) setInputValue('0')
     else if (tmp >budget)  setInputValue('한도 초과')
     else {
