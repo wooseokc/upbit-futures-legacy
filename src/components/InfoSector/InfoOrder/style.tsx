@@ -104,8 +104,8 @@ export const LongButton = styled.button`
 
 export const EnterIndex = styled.div<any>`
   color : black;
-  ${props => props.fluc > 0 && {color : 'red'}}
-  ${props => props.fluc < 0 && {color : 'blue'}}
+  ${props => props.fluc > 0 && {color : '#c84a31'}}
+  ${props => props.fluc < 0 && {color : '#1261c4'}}
   position : absolute;
   right : 10px;
 `

@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/hooks";
 import useInterval from "../../../hooks/useInterval";
-import { Candle, CandleBox, CandleContainer, ChartContainer, Line, MinuteSelect, OptionContainer, TopBar } from "./style";
+import { Candle, CandleBox, CandleContainer, CandlePrice, ChartContainer, Line, MinuteSelect, OptionContainer, TopBar, VolumeContainer, VolumePrice } from "./style";
 
 interface data {
   candle_acc_trade_price : number
@@ -23,22 +24,25 @@ export default function Chart () {
   const [top, setTop] = useState(0);
   const [bottom, setBottom] = useState(0);
   const [total, setTotal] = useState<number | undefined>();
-  const [nowOpen, setNowOpen] = useState<number | undefined>();
-  const [coinPrice, setCoinPrice] = useState<number | undefined>();
+  const [volumeTop, setVolumeTop] = useState<number | undefined>();
+  const [nowOpen, setNowOpen] = useState<number | undefined | null>();
+  const [coinPrice, setCoinPrice] = useState<number | undefined | null>();
 
   const coin = useAppSelector(state => state.coin.now);
   const price : any = useAppSelector(state => state.coin.price)
   
   async function apicall() {
-    await axios.get(`https://api.upbit.com/v1/candles/minutes/${unit}?market=KRW-${coin}&count=100`).then(res => {
+    return await axios.get(`https://api.upbit.com/v1/candles/minutes/${unit}?market=KRW-${coin}&count=100`).then(res => {
       setChartArr(res.data.reverse());
     });
   } 
+
 
   useEffect(() => {
     if (chartArr) {
       let t = 0;
       let b = Number.MAX_SAFE_INTEGER;
+      let vT = 0;
       for (let i = 0; i < chartArr.length; i ++) {
         if (chartArr[i].low_price < b) {
           b = chartArr[i].low_price
@@ -46,35 +50,43 @@ export default function Chart () {
         if (chartArr[i].high_price > t) {
           t = chartArr[i].high_price
         }
+        if (chartArr[i].candle_acc_trade_volume > vT) {
+          vT = chartArr[i].candle_acc_trade_volume
+        }
       }
       setBottom(b)
       setTop(t)
       setTotal(t-b)
+      setVolumeTop(vT)
       setNowOpen(price.trade_price)
     }
   }, [chartArr])
 
   useEffect(()=> {
-    apicall()
+    apicall().then(()=> {
+      setTotal(undefined)
+      setVolumeTop(undefined)
+    })
   }, [unit]);
 
   useEffect(()=> {
+    setVolumeTop(undefined)
+    apicall()
+  }, [coin])
+
+  useEffect(()=> {
     setCoinPrice(price.trade_price)
-  }, [price.trade_price]);
+  }, [price]);
 
   const enterBet = (e: React.MouseEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value)
     setUnit(e.currentTarget.value)
-    console.log(bottom)
-    console.log(top)
   }
 
-  useInterval(apicall, 30000)
+  useInterval(apicall, 20000)
   
   let candleItem : any;
   if (total && chartArr) {
     candleItem = chartArr.map((item) => {
-
          return (
           <CandleBox key={item.timestamp}>
             <Candle height={Math.floor(Math.abs(item.trade_price-item.opening_price)/total*310)} position={(item.trade_price > item.opening_price ? item.opening_price - bottom : item.trade_price -bottom)/total*310} color={item.opening_price - item.trade_price}></Candle>
@@ -84,9 +96,16 @@ export default function Chart () {
     })
   } 
 
-
-
-
+  let volumeItem : any;
+  if (volumeTop && chartArr) {
+    volumeItem = chartArr.map((item, idx) => {
+      return (
+        <CandleBox key={item.timestamp}>
+          <Candle height={(item.candle_acc_trade_volume/volumeTop)*100} position={0} color={idx-1 >=0 ? chartArr[idx-1].candle_acc_trade_volume - chartArr[idx].candle_acc_trade_volume: -1}></Candle>
+        </CandleBox>
+      )
+    })
+  }
 
   return (
     <> 
@@ -106,13 +125,35 @@ export default function Chart () {
           <CandleContainer>
               {candleItem}
               {
-                (nowOpen && total && coinPrice) &&
+                ((nowOpen && total) && coinPrice) &&
                 <CandleBox>
-                  <Candle height={Math.floor(Math.abs(nowOpen-coinPrice)/total*310)} position={(nowOpen > coinPrice ? coinPrice - bottom : nowOpen -bottom)/total*310} color={nowOpen - coinPrice} ></Candle>
+                  {Math.abs(nowOpen-coinPrice) < total && <Candle height={Math.floor(Math.abs(nowOpen-coinPrice)/total*310)} position={(nowOpen > coinPrice ? coinPrice - bottom : nowOpen -bottom)/total*310} color={nowOpen - coinPrice} ></Candle>}
                   <Line></Line>
                 </CandleBox>
               }
           </CandleContainer>
+          <CandlePrice>
+            <div>{top.toLocaleString()}</div>
+            <div>{(bottom + (top-bottom) * 0.75).toLocaleString()}</div>
+            <div>{(bottom + (top-bottom) * 0.5).toLocaleString()}</div>
+            <div>{(bottom + (top-bottom) * 0.25).toLocaleString()}</div>
+            <div>{bottom.toLocaleString()}</div>
+          </CandlePrice>
+          <VolumeContainer>
+            
+              {volumeItem}
+            
+          </VolumeContainer>
+          {
+            volumeTop && 
+            <VolumePrice>
+              <div>{Math.floor(volumeTop)}</div>
+              <div>{Math.floor(volumeTop*0.75)}</div>
+              <div>{Math.floor(volumeTop*0.5)}</div>
+              <div>{Math.floor(volumeTop*0.25)}</div>
+              <div>{0}</div>
+            </VolumePrice>
+          }
         </ChartContainer>
       </>
     }  

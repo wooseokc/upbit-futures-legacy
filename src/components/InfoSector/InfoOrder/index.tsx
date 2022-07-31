@@ -104,8 +104,16 @@ export default function Order () {
      else if (e.currentTarget.innerHTML === '100%') {
       setInputValue(Math.floor(budget).toLocaleString())
     }
-    
   }
+
+  useEffect(()=>{
+    setCondition('ready')
+    setBudget(money => money+resultPrice)
+    setEnterPrice(undefined)
+    if (orderPrice) {
+      setLastResult(resultPrice-orderPrice)
+    }
+  }, [coin])
 
 
   return (
@@ -146,10 +154,6 @@ export default function Order () {
         {enterPrice && <EnterIndex>{orderPrice.toLocaleString()}</EnterIndex>}
       </TypeBox>
       <TypeBox>
-        <CategoryInfo>진입가격</CategoryInfo>
-        {enterPrice && <EnterIndex>{enterPrice.toLocaleString()}</EnterIndex>}
-      </TypeBox>
-      <TypeBox>
         <CategoryInfo>변동폭</CategoryInfo>
         {enterPrice && <EnterIndex fluc={fluctuation}>{
         coinPrice && `${(fluctuation).toFixed(2)}%`
@@ -158,6 +162,10 @@ export default function Order () {
       <TypeBox>
         <CategoryInfo>수익률</CategoryInfo>
         {enterPrice && <EnterIndex fluc={fluctuation}>{`${(fluctuation*leverage).toFixed(2)}%`}</EnterIndex>}
+      </TypeBox>
+      <TypeBox>
+        <CategoryInfo>손익</CategoryInfo>
+        {enterPrice && <EnterIndex fluc={fluctuation}>{(resultPrice-orderPrice).toLocaleString()}</EnterIndex>}
       </TypeBox>
       <TypeBox>
         <CategoryInfo>정산금액</CategoryInfo>
