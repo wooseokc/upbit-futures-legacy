@@ -17,9 +17,11 @@
 
 # 사용된 기술
 
-
+<div>
  <img src="./src/images/html5.svg" width="30" height="30">
  html5
+<div>
+
  <img src="././src/images/css3.svg" width="30" height="30">
  <img src="./src/images/typescript.svg" width="30" height="30">
  <img src="./src/images/react.svg" width="30" height="30">
