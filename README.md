@@ -19,7 +19,7 @@
 
 <img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
 
- ![실행화면](./src/images/html5.svg)
+ ![실행화면](./src/images/html5.svg){: width="100" height="100"}
  ![실행화면](./src/images/css3.svg)
  ![실행화면](./src/images/typescript.svg)
  ![실행화면](./src/images/react.svg)
