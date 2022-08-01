@@ -18,13 +18,14 @@
 # 사용된 기술
 
 
- ![실행화면](./src/images/html5.svg){: width="100" height="100"};
- <img src="./src/images/html5.svg" width="100" height="100">
- ![실행화면](./src/images/css3.svg)
- ![실행화면](./src/images/typescript.svg)
- ![실행화면](./src/images/react.svg)
- ![실행화면](./src/images/redux.svg)
- ![실행화면](./src/images/styledcomponents.svg)
+ <img src="./src/images/html5.svg" width="30" height="30">
+ html5
+ <img src="././src/images/css3.svg" width="30" height="30">
+ <img src="./src/images/typescript.svg" width="30" height="30">
+ <img src="./src/images/react.svg" width="30" height="30">
+ <img src="./src/images/redux.svg" width="30" height="30">
+ <img src="./src/images/styledcomponents.svg" width="30" height="30">
+
 
 # 배포 history
 
