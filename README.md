@@ -1,3 +1,29 @@
-업비트 시세 정보 api를 이용해서 업비트에 없는 선물거래 기능을 구현해보려는 프로젝트입니다.
-수익률 -90프로 나면 청산당하니까 조심하세요.
-돈 다 날라가면 새로고침하세요.
+# 본 프로젝트는 배포가 완료된 프로젝트 입니다.
+[https://upbit-futures.web.app/](https://upbit-futures.web.app/).
+
+# 사용법
+
+ ![실행화면](./src/images/upbitFutures.png)
+ 
+ 1. 코인을 선택할 수 있습니다. 비트코인이나 이더리움 중 하나 고르세요
+
+ 2. 분봉을 택할 수 있습니다. 1분봉 3분봉 5분봉을 준비했습니다.
+
+ 3. 레버리지를 고르세요. 500배까지 가능합니다. 다만 -90%가 되면 청산되니까 주의하세요
+
+ 4. 주문 총액을 정하시면 됩니다.
+
+ 5. 베팅의 종류를 선택하세요. 숏은 하락 롱은 상승에 베팅하는 것입니다.
+
+# 사용된 기술
+
+ ![실행화면](./src/images/html5.svg)
+ ![실행화면](./src/images/css3.svg)
+ ![실행화면](./src/images/typescript.svg)
+ ![실행화면](./src/images/react.svg)
+ ![실행화면](./src/images/redux.svg)
+ ![실행화면](./src/images/styledcomponents.svg)
+
+# 배포 history
+
+08.01 거래중 코인 변경할 때 거래가 끝나지 않던 버그 수정
