@@ -21,12 +21,27 @@
  <img src="./src/images/html5.svg" width="30" height="30">
  html5
 <div>
-
+<div>
  <img src="././src/images/css3.svg" width="30" height="30">
+ css3
+<div>
+<div>
  <img src="./src/images/typescript.svg" width="30" height="30">
+ typescript
+<div>
+<div>
  <img src="./src/images/react.svg" width="30" height="30">
+ react
+<div> 
+<div>
  <img src="./src/images/redux.svg" width="30" height="30">
+ redux
+<div> 
+<div>
  <img src="./src/images/styledcomponents.svg" width="30" height="30">
+ styledcomponents
+<div>  
+
 
 
 # 배포 history
