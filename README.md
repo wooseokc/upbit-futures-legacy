@@ -17,6 +17,8 @@
 
 # 사용된 기술
 
+<img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
+
  ![실행화면](./src/images/html5.svg)
  ![실행화면](./src/images/css3.svg)
  ![실행화면](./src/images/typescript.svg)
