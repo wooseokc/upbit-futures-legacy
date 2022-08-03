@@ -13,9 +13,9 @@ export default function Header () {
         <NavItem hove={false}>투자내역</NavItem>
         <NavItem hove={false}>코인동향</NavItem>
         <NavItem hove={false}>스테이킹</NavItem>
-        <NavItem hove={false} style={{position: 'absolute', left : 625, bottom: 19}}>NFT</NavItem>
-        <NavItem hove={false} style={{position: 'relative', left : 58}}>고객센터</NavItem>
-        <NavItem style={{color : '#fff', position: 'relative', left : 55}} hove={def}>선물거래</NavItem>
+        <NavItem hove={false} character='NFT'>NFT</NavItem>
+        <NavItem hove={false} character='고객센터'>고객센터</NavItem>
+        <NavItem hove={def}  character="선물거래">선물거래</NavItem>
       </Nav>
     </HeaderSection>
   )

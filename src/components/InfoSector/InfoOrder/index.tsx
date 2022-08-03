@@ -134,7 +134,7 @@ export default function Order () {
         <RangeIndex>{leverage}</RangeIndex>
         <RangeTimes>X</RangeTimes>
       </TypeBox>
-      <TypeBox style={{height :80}}>
+      <TypeBox character='주문총액'>
         <CategoryInfo>주문총액</CategoryInfo>
         <InputBox type={"text"} value={inputValue} onChange={changeLocaleScale}></InputBox>
         <div>
@@ -144,7 +144,7 @@ export default function Order () {
           <InputButton onClick={bettingRatio} style={{left : 300}}>100%</InputButton>
         </div>
       </TypeBox>
-      <TypeBox style={{height : 40}}>
+      <TypeBox character="버튼">
         {condition === 'ready' ? <ShortButton onClick={enterBet}>Short / 하락</ShortButton> : <ShortButton onClick={exitBet} style={{background : 'gray'}}>중지</ShortButton>}
         {condition === 'ready' ? <LongButton onClick={enterBet}>Long / 상승</LongButton> : <LongButton onClick={exitBet}  style={{background : 'gray'}}>중지</LongButton>}
         

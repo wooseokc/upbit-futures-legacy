@@ -47,3 +47,6 @@
 # 배포 history
 
 08.01 거래중 코인 변경할 때 거래가 끝나지 않던 버그 수정
+<br>
+08.03 스타일 컴포넌트 리팩토링
+[관련 내용](https://wooseokc.github.io/single-project/upbitFuturesStyleRefactoring/).

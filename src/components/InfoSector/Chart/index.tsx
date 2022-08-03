@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { ReactComponentElement, useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/hooks";
 import useInterval from "../../../hooks/useInterval";
 import { Candle, CandleBox, CandleContainer, CandlePrice, ChartContainer, Line, MinuteSelect, OptionContainer, TopBar, VolumeContainer, VolumePrice } from "./style";

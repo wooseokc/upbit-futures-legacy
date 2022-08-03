@@ -36,9 +36,6 @@ export default function CoinInfo () {
           </TotalItem>
         </TotalInfo>
       </InfoBox>}
-    
     </>
-
-
   )
 }
