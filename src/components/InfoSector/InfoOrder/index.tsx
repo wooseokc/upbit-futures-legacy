@@ -7,6 +7,7 @@ import { OrderBox, TypeBox ,CategoryInfo, DefaultRadio, Range, EnterIndex ,Range
 
 
 export default function Order () {
+  const [condition, setCondition] = useState('ready');
   const [budget, setBudget] = useState(10000000);
   const [leverage, setLeverage] = useState(5);
   const [coinPrice, setCoinPrice] = useState<number | undefined>(undefined);
@@ -14,7 +15,6 @@ export default function Order () {
   const [orderPrice, setOrderPrice] = useState(0);
   const [enterPrice, setEnterPrice] = useState<number | undefined>(undefined)
   const [fluctuation, setFluctuation] = useState(0);
-  const [condition, setCondition] = useState('ready');
   const [resultPrice, setResultPrice] = useState(0);
   const [lastResult, setLastResult] = useState<number | undefined>(undefined)
 

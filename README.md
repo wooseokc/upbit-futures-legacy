@@ -48,5 +48,6 @@
 
 08.01 거래중 코인 변경할 때 거래가 끝나지 않던 버그 수정
 <br>
-08.03 스타일 컴포넌트 리팩토링
+08.03 <br> 1 스타일 컴포넌트 리팩토링
 [관련 내용](https://wooseokc.github.io/single-project/upbitFuturesStyleRefactoring/).
+<br> 2 . InfoHeader 컴포넌트 파일이 부모 컴포넌트인 InfoSector 폴더가 아닌 상위 폴더에 있어서 수정

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { changeCoin } from "../../../reducers/coinSlice";
-import { useAppDispatch , useAppSelector} from "../../hooks/hooks";
-import { changeCoin } from "../../reducers/coinSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { changeCoin } from "../../../reducers/coinSlice";
 
 import { Container, Forms, Img, Korean, English, Arrow, CoinList } from "./style";
 

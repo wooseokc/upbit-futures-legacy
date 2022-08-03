@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 
 import InfoSection from "./style";
-import InfoHeader from "../InfoHeader";
+import InfoHeader from "./InfoHeader";
 import Order from "./InfoOrder";
 import Chart from "./Chart";
 // import InfoHeader from "./InfoHeader";
