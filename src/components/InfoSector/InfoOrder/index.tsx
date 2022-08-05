@@ -2,9 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import useInterval from "../../../hooks/useInterval";
-import { changePrice } from "../../../reducers/coinSlice";
 import { OrderBox, TypeBox ,CategoryInfo, DefaultRadio, Range, EnterIndex ,RangeIndex, RangeTimes, InputBox, ShortButton, LongButton, InputButton } from "./style";
-
 
 export default function Order () {
   const [condition, setCondition] = useState('ready');
@@ -20,14 +18,19 @@ export default function Order () {
 
   const dispatch = useAppDispatch()
   const coin = useAppSelector((state) => state.coin.now);
-  
-  async function apicall() {
-    await axios.get(`https://api.upbit.com/v1/ticker?markets=KRW-${coin}`).then(res => {
-      setCoinPrice(res.data[0].trade_price)
-      dispatch(changePrice(res.data[0]))
-    })
-  } 
-  useInterval(apicall, 500)
+  const price : any = useAppSelector((state) => state.coin.price)
+
+  useEffect (()=> {
+    setCoinPrice(price.trade_price)
+  }, [price])
+
+  // async function apicall() {
+  //   await axios.get(`https://api.upbit.com/v1/ticker?markets=KRW-${coin}`).then(res => {
+  //     setCoinPrice(res.data[0].trade_price)
+  //     dispatch(changePrice(res.data[0]))
+  //   })
+  // } 
+  // useInterval(apicall, 500)
 
   useEffect(()=> {
     if(enterPrice && coinPrice) {

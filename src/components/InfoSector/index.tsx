@@ -1,25 +1,34 @@
 import React from "react";
-import { Provider } from "react-redux";
 
 import InfoSection from "./style";
 import InfoHeader from "./InfoHeader";
 import Order from "./InfoOrder";
 import Chart from "./Chart";
+
+import { coinApiCall } from "../../reducers/coinSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 // import InfoHeader from "./InfoHeader";
 
-import store from "../../stores/coinStore";
 import CoinInfo from "./InfoCoin";
+import useInterval from "../../hooks/useInterval";
 
 export default function InfoSector () {
 
+  const dispatch = useAppDispatch()
+
+  useInterval(() => {
+    dispatch(coinApiCall())
+  }, 500)
+
   return (
-    <Provider store={store}>
+    <>
       <InfoSection>
         <InfoHeader></InfoHeader>
         <CoinInfo></CoinInfo>
         <Chart></Chart>
       </InfoSection>
       <Order></Order>
-    </Provider>
+    </>
+
   )
 }
