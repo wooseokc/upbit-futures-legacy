@@ -46,4 +46,5 @@ export const NavItem = styled.div<{hove : boolean, character? : string}>`
   ${(props) => (props.character === '선물거래' && {color : '#fff', position: 'relative', left : 55})}
   &:hover {
     font-weight: ${(props) => (props.hove === true ? '400' : '700')}
+  }
 `

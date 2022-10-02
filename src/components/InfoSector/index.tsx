@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import InfoSection from "./style";
 import InfoHeader from "./InfoHeader";
 import Order from "./InfoOrder";
 import Chart from "./Chart";
 
-import { coinApiCall } from "../../reducers/coinSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { changePrice } from "../../reducers/coinSlice";
 // import InfoHeader from "./InfoHeader";
 
 import CoinInfo from "./InfoCoin";
-import useInterval from "../../hooks/useInterval";
+
 
 export default function InfoSector () {
 
   const dispatch = useAppDispatch()
+  const coin = useAppSelector((state) => state.coin.now);
 
-  useInterval(() => {
-    dispatch(coinApiCall())
-  }, 500)
+  useEffect(() => {
+    const webSocket = new WebSocket('wss://api.upbit.com/websocket/v1');
+    webSocket.binaryType = 'arraybuffer';
+    webSocket.onopen = () => {
+      const str = [{"ticket":"test"},{"type":"ticker","codes":[`KRW-${coin}`]}]
+      webSocket.send(JSON.stringify(str))
+      console.log('connect')
+    }
+
+    webSocket.onmessage = (evt) => {
+      let enc = new TextDecoder("utf-8");
+      let arr = new Uint8Array(evt.data);
+      let data = JSON.parse(enc.decode(arr));
+      dispatch(changePrice(data))
+    }
+
+    return () => {
+      webSocket.close()
+    }
+  }, [coin])
 
   return (
     <>

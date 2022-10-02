@@ -8,18 +8,12 @@ import { Provider } from "react-redux";
 
 function App() {
   return (
-    <> {
-      window.innerWidth > 600 ? 
-      <>
-        <GlobalStyle />
-        <Provider store={store}>
-          <Header />
-          <InfoSector/>
-        </Provider>
-      
-      </> :
-      <div>Please use Upbit futures in PC</div>
-    }
+    <> 
+      <GlobalStyle />
+      <Provider store={store}>
+        <Header />
+        <InfoSector/>
+      </Provider>
     </>
   );
 }
